@@ -146,3 +146,7 @@ G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\D
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.csproj.CoreCompileInputs.cache
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.MvcApplicationPartsAssemblyInfo.cache
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.csprojAssemblyReference.cache
+G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

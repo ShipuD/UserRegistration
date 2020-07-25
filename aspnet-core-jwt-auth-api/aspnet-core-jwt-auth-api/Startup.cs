@@ -32,11 +32,12 @@ namespace aspnet_core_jwt_auth_api
             //services.AddDbContext<UserContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
 
+            //Add DB Conn string
             var connectionString = Configuration["ConnectionString:UsersRegDB"];
 
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
-            services.AddControllers();
 
+            services.AddControllers();
 
         }
 

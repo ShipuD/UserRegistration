@@ -1,10 +1,15 @@
 ﻿using aspnet_core_jwt_auth_api.Data;
 using aspnet_core_jwt_auth_api.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace aspnet_core_jwt_auth_api.Services
@@ -12,10 +17,13 @@ namespace aspnet_core_jwt_auth_api.Services
     public class UserService : IUserService
     {
         private readonly UserContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserService(UserContext context)
+        public UserService(UserContext context,
+            IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public AuthResponse Authenticate(AuthRequest authRequest)
@@ -34,7 +42,21 @@ namespace aspnet_core_jwt_auth_api.Services
 
         private string GenerateJWTToken(User user)
         {
-            throw new NotImplementedException();
+            //Get the secrete Key
+            var jwtSecretKey = _configuration.GetValue<string>("AppSettings:Secret");
+            var key = Encoding.ASCII.GetBytes(jwtSecretKey);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            //Key created which is valid for 10 days and could be configured from appsettings
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(10),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            //Create Token
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         public AuthResponse SignIn(User user)
