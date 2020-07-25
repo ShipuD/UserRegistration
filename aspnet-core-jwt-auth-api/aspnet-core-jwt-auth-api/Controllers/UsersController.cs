@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using aspnet_core_jwt_auth_api.Data;
 using aspnet_core_jwt_auth_api.Models;
+using aspnet_core_jwt_auth_api.Services;
 
 namespace aspnet_core_jwt_auth_api.Controllers
 {
@@ -14,25 +15,37 @@ namespace aspnet_core_jwt_auth_api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly IUserService _userService;
 
-        public UsersController(UserContext context)
-        {
-            _context = context;
+        public UsersController(IUserService userService)
+        {   
+            _userService = userService;
         }
 
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthRequest authRequest)
+        {
+            var response = _userService.Authenticate(authRequest);
+            if(response == null)
+            {
+                return BadRequest(
+                    new { message = "User Name or Password is in correct" }
+                );
+            }
+            return Ok(response);
+        }
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.User.ToListAsync();
+            return await _userService.GetUsers();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _userService.GetById(id);
 
             if (user == null)
             {
@@ -53,25 +66,17 @@ namespace aspnet_core_jwt_auth_api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
+            var returnResult =await _userService.PutUser(id, user);
+            if (returnResult == 1)
             {
-                await _context.SaveChangesAsync();
+                return Ok();
             }
-            catch (DbUpdateConcurrencyException)
+            else 
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                 return BadRequest(
+                    new { message = "User registarion has failed and retry again" }
+                );
             }
-
-            return NoContent();
         }
 
         // POST: api/Users
@@ -80,31 +85,20 @@ namespace aspnet_core_jwt_auth_api.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            var retUser = await _userService.PostUser(user);
+            return retUser;
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _userService.DeleteUser(id);
             if (user == null)
             {
                 return NotFound();
             }
-
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
             return user;
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.User.Any(e => e.Id == id);
         }
     }
 }

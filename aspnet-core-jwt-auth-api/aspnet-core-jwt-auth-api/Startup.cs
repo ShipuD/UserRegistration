@@ -27,10 +27,17 @@ namespace aspnet_core_jwt_auth_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddControllers();
+
+            //services.AddDbContext<UserContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
+
+            var connectionString = Configuration["ConnectionString:UsersRegDB"];
+
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
             services.AddControllers();
 
-            services.AddDbContext<UserContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

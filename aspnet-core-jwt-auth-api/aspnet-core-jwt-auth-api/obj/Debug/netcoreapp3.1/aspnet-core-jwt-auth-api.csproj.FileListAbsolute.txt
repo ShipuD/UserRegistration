@@ -2,7 +2,6 @@ G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\D
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\appsettings.json
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.exe
-G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.csprojAssemblyReference.cache
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.AssemblyInfoInputs.cache
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.AssemblyInfo.cs
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.RazorTargetAssemblyInfo.cache
@@ -146,3 +145,4 @@ G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\D
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.csproj.CoreCompileInputs.cache
 G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.MvcApplicationPartsAssemblyInfo.cache
+G:\Work\UserRegistration\aspnet-core-jwt-auth-api\aspnet-core-jwt-auth-api\obj\Debug\netcoreapp3.1\aspnet-core-jwt-auth-api.csprojAssemblyReference.cache
