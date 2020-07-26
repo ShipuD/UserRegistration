@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using aspnet_core_jwt_auth_api.Data;
+using aspnet_core_jwt_auth_api.Services;
 
 namespace aspnet_core_jwt_auth_api
 {
@@ -36,6 +37,7 @@ namespace aspnet_core_jwt_auth_api
             var connectionString = Configuration["ConnectionString:UsersRegDB"];
 
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<IUserService, UserService>();    
 
             services.AddControllers();
 

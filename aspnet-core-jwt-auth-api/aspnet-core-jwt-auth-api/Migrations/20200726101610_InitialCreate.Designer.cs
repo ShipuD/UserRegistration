@@ -9,7 +9,7 @@ using aspnet_core_jwt_auth_api.Data;
 namespace aspnet_core_jwt_auth_api.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20200725121201_InitialCreate")]
+    [Migration("20200726101610_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace aspnet_core_jwt_auth_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

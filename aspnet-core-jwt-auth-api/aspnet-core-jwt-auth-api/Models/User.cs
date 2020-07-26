@@ -12,7 +12,7 @@ namespace aspnet_core_jwt_auth_api.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
-
+        public string email { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
     }
