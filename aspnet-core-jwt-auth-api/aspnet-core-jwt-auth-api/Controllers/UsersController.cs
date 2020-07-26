@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using aspnet_core_jwt_auth_api.Data;
 using aspnet_core_jwt_auth_api.Models;
 using aspnet_core_jwt_auth_api.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace aspnet_core_jwt_auth_api.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -29,7 +31,7 @@ namespace aspnet_core_jwt_auth_api.Controllers
             if(response == null)
             {
                 return BadRequest(
-                    new { message = "User Name or Password is in correct" }
+                    new { message = "User Name or Password is incorrect" }
                 );
             }
             return Ok(response);
@@ -74,7 +76,7 @@ namespace aspnet_core_jwt_auth_api.Controllers
             else 
             {
                  return BadRequest(
-                    new { message = "User registarion has failed and retry again" }
+                    new { message = "User update has failed and retry again" }
                 );
             }
         }
@@ -83,9 +85,15 @@ namespace aspnet_core_jwt_auth_api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> Signup(User user)
         {
             var retUser = await _userService.PostUser(user);
+            if(retUser.Id <= 0)
+            {
+                return BadRequest(
+                   new { message = "Registration has failed and retry again" }
+               );
+            }
             return retUser;
         }
 

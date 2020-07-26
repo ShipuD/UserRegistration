@@ -18,6 +18,8 @@ namespace aspnet_core_jwt_auth_api
 {
     public class Startup
     {
+        readonly string AllowSpecificOrigins = "_allowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,7 +39,20 @@ namespace aspnet_core_jwt_auth_api
             var connectionString = Configuration["ConnectionString:UsersRegDB"];
 
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<IUserService, UserService>();    
+            services.AddScoped<IUserService, UserService>();
+            // Add service and create Policy with options
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200",
+                                        "http://localhost:4300")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+            services.AddMvc();
 
             services.AddControllers();
 
@@ -46,13 +61,14 @@ namespace aspnet_core_jwt_auth_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(AllowSpecificOrigins);
             app.UseRouting();
 
             app.UseAuthorization();
@@ -61,6 +77,8 @@ namespace aspnet_core_jwt_auth_api
             {
                 endpoints.MapControllers();
             });
+            
+
         }
     }
 }

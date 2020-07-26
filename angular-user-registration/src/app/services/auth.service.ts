@@ -5,25 +5,24 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import *  as config from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   
     constructor(private http: HttpClient) {
         
     }   
 
-    login(username, password) {
+    login(user:User) {
         return this.http.post<any>
-                  (`${config.environment.AuthAPI}/users/signin`, 
+                  (`${config.environment.AuthAPI}/users/authenticate`, 
                     {
-                      username, 
-                      password 
+                      username:user.username, 
+                      password:user.password
                     },
                     httpOptions
                   );

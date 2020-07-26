@@ -11,7 +11,7 @@ namespace aspnet_core_jwt_auth_api.Services
 
         public AuthResponse Signup(User user);
         public AuthResponse Authenticate(AuthRequest authRequest);
-        public AuthResponse SignIn(User user);
+        //public AuthResponse SignIn(User user);
         public AuthResponse SignOut(User user);
         public Task<IEnumerable<User>> GetUsers();
         public Task<User> GetById(int Id);
