@@ -6,13 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200725104603_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200725104603_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200725121201_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200725121201_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />

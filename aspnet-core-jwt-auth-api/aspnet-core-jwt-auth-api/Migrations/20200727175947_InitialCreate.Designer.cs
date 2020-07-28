@@ -9,7 +9,7 @@ using aspnet_core_jwt_auth_api.Data;
 namespace aspnet_core_jwt_auth_api.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20200726101610_InitialCreate")]
+    [Migration("20200727175947_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,11 @@ namespace aspnet_core_jwt_auth_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")

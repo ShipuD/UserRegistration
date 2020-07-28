@@ -8,6 +8,7 @@ import *  as config from '../../environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,24 +19,30 @@ export class AuthService {
     }   
 
     login(user:User) {
+
+      const data = {
+        username: user.username,                    
+        password: user.password,
+      }
         return this.http.post<any>
                   (`${config.environment.AuthAPI}/users/authenticate`, 
-                    {
-                      username:user.username, 
-                      password:user.password
-                    },
+                    data,
                     httpOptions
                   );
     }
+    
     register(user:User):Observable<any> {
+      
+      const data = {
+        username: user.username,                    
+        password: user.password,
+        email: user.email
+      }
       return this.http.post<any>
               (`${config.environment.AuthAPI}/users/signup`, 
-                {
-                    username: user.username,
-                    email: user.email,
-                    password: user.password
-                },
-                httpOptions
+                  data,
+                  httpOptions
               );
+            
     }    
 }

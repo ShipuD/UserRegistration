@@ -117,9 +117,9 @@ namespace aspnet_core_jwt_auth_api.Services
         public async Task<User> PostUser(User user)
         {
             _context.User.Add(user);
-            await _context.SaveChangesAsync();
+             _context.SaveChangesAsync();
 
-            var  createdUser = await GetById(user.Id);
+            var  createdUser = await  GetById(user.Id);
             return createdUser;
         }
 
