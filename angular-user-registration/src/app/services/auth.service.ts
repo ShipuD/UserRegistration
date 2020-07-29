@@ -26,7 +26,7 @@ export class AuthService {
       }
         return this.http.post<any>
                   (`${config.environment.AuthAPI}/users/authenticate`, 
-                    data,
+                    user,
                     httpOptions
                   );
     }
@@ -40,7 +40,7 @@ export class AuthService {
       }
       return this.http.post<any>
               (`${config.environment.AuthAPI}/users/signup`, 
-                  data,
+                  user,
                   httpOptions
               );
             
