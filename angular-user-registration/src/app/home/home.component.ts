@@ -9,7 +9,8 @@ import { User } from '../modals/user';
 })
 export class HomeComponent implements OnInit {
   token:string;
-  currentUser:User;
+  currentUser:any;
+  username:string;
 
   constructor(private tokenStorage: TokenStorageService) { }
   
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   
         this.currentUser = this.tokenStorage.getUser();
         console.log('user is', this.currentUser);
+        //this.username = this.currentUser.userName;
       }
 
   }

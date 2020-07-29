@@ -89,8 +89,8 @@ namespace aspnet_core_jwt_auth_api.Controllers
         {
             //Check if user exists
             var existingUsers = await _userService.GetUsers();
-            var existingUser = existingUsers.First(r => r.UserName == user.UserName);
-            if (existingUser != null)
+            var existingUser = existingUsers.Count(r => r.UserName == user.UserName);
+            if (existingUser > 0)
             {
                 return BadRequest(
                    new { message = "UserName already exists.Please choose some other User Name" }

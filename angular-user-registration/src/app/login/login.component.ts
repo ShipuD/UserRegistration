@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.reloadPage();
-        //Go to home page
+        //Go to home page 
         //this.router.navigate(["home"]);
       },
       err=> {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../modals/user';
 const JWT_TOKEN_KEY = 'jwt-auth-token';
 const USER_KEY = 'jwt-auth-user';
 
@@ -22,7 +23,7 @@ export class TokenStorageService {
     return sessionStorage.getItem(JWT_TOKEN_KEY);
   }
 
-  public saveUser(user) {
+  public saveUser(user:User) {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
