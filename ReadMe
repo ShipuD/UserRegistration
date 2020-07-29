@@ -1,0 +1,21 @@
+
+
+
+
+1) The data store used is SQL DB
+2) Add migration using powershell(Package manager command) commands
+     Add-Migration InitialCreate
+	   Update-Database
+	   *Use this if you wnat to remove) remove-migration 
+2)REST API solution should be Run locally using express 
+3)First time the UserRegDb is created
+4) Clone and build agular app
+5)  Click on Sign up for signing up
+6) Once signed in,click on Home to check the token and User
+7) Click on Logout
+
+TODO:
+------
+1) The Password is stored as is in DB and needs to be encrypted
+2) Tests around API and Angular needs to be built
+3) User messages could be put in a const c# file so that they are all in one place.
