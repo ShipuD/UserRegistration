@@ -9,6 +9,8 @@ using aspnet_core_jwt_auth_api.Data;
 using aspnet_core_jwt_auth_api.Models;
 using aspnet_core_jwt_auth_api.Services;
 using Microsoft.AspNetCore.Cors;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace aspnet_core_jwt_auth_api.Controllers
 {
@@ -24,9 +26,54 @@ namespace aspnet_core_jwt_auth_api.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Create the hash of the password of the user
+        /// </summary>
+        /// <param name="item">User</param>
+        private string GenerateHash(User item)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(item.Password));
+
+                StringBuilder stringbuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    stringbuilder.Append(bytes[i].ToString("x2"));
+                }
+
+                item.Password = stringbuilder.ToString();
+            }
+            return item.Password;
+        }
+
+        /// <summary>
+        /// Create the hash of the password of the user
+        /// </summary>
+        /// <param name="item">AuthRequest</param>
+        private string GenerateHash(AuthRequest item)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(item.Password));
+
+                StringBuilder stringbuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    stringbuilder.Append(bytes[i].ToString("x2"));
+                }
+
+                item.Password = stringbuilder.ToString();
+            }
+            return item.Password;
+        }
+
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthRequest authRequest)
         {
+            // generate the hash
+            authRequest.Password = GenerateHash(authRequest);
+
             var response = _userService.Authenticate(authRequest);
             if(response == null)
             {
@@ -58,8 +105,6 @@ namespace aspnet_core_jwt_auth_api.Controllers
         }
 
         // PUT: api/Users/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -67,6 +112,9 @@ namespace aspnet_core_jwt_auth_api.Controllers
             {
                 return BadRequest();
             }
+
+            // generate the hash
+            user.Password = GenerateHash(user);
 
             var returnResult =await _userService.PutUser(id, user);
             if (returnResult == 1)
@@ -82,8 +130,6 @@ namespace aspnet_core_jwt_auth_api.Controllers
         }
 
         // POST: api/Users
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost("signup")]
         public async Task<ActionResult<User>> Signup(User user)
         {
@@ -93,15 +139,18 @@ namespace aspnet_core_jwt_auth_api.Controllers
             if (existingUser > 0)
             {
                 return BadRequest(
-                   new { message = "UserName already exists.Please choose some other User Name" }
+                   new { message = "UserName already exists. Please choose some other User Name" }
                );
             }
+
+            // generate the hash
+            user.Password = GenerateHash(user);
 
             var retUser = await _userService.PostUser(user);
             if(retUser.Id <= 0)
             {
                 return BadRequest(
-                   new { message = "Registration failed and retry again." }
+                   new { message = "Registration failed, retry again." }
                );
             }
             return retUser;
