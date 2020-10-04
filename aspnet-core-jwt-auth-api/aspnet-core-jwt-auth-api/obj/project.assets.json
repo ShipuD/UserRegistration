@@ -8729,25 +8729,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Shipu\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Paolo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Work\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api.csproj",
+      "projectUniqueName": "C:\\Users\\Paolo\\Documents\\Progetti\\Hacktoberfest 2020\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api.csproj",
       "projectName": "aspnet-core-jwt-auth-api",
-      "projectPath": "G:\\Work\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api.csproj",
-      "packagesPath": "C:\\Users\\Shipu\\.nuget\\packages\\",
-      "outputPath": "G:\\Work\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\obj\\",
+      "projectPath": "C:\\Users\\Paolo\\Documents\\Progetti\\Hacktoberfest 2020\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api.csproj",
+      "packagesPath": "C:\\Users\\Paolo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Paolo\\Documents\\Progetti\\Hacktoberfest 2020\\UserRegistration\\aspnet-core-jwt-auth-api\\aspnet-core-jwt-auth-api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Shipu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Paolo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -8819,7 +8814,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,8 +27,32 @@ namespace aspnet_core_jwt_auth_api.Services
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Create the hash of the password of the user
+        /// </summary>
+        /// <param name="item">AuthRequest</param>
+        private string GenerateHash(AuthRequest item)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(item.Password));
+
+                StringBuilder stringbuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    stringbuilder.Append(bytes[i].ToString("x2"));
+                }
+
+                item.Password = stringbuilder.ToString();
+            }
+            return item.Password;
+        }
+
         public AuthResponse Authenticate(AuthRequest authRequest)
         {
+            // generate the hash
+            authRequest.Password = GenerateHash(authRequest);
+
             //Check if user exists with correct password
             var user = _context.User.SingleOrDefault(x => x.UserName == authRequest.UserName 
                                                         && x.Password == authRequest.Password);
@@ -88,10 +113,32 @@ namespace aspnet_core_jwt_auth_api.Services
             return user;
         }
 
-        
+        /// <summary>
+        /// Create the hash of the password of the user
+        /// </summary>
+        /// <param name="item">User</param>
+        private string GenerateHash(User item)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(item.Password));
+
+                StringBuilder stringbuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    stringbuilder.Append(bytes[i].ToString("x2"));
+                }
+
+                item.Password = stringbuilder.ToString();
+            }
+            return item.Password;
+        }
+
         public async Task<int> PutUser(int id, User user)
         {
-            
+            // generate the hash
+            user.Password = GenerateHash(user);
+
             _context.Entry(user).State = EntityState.Modified;
 
             try
@@ -116,8 +163,11 @@ namespace aspnet_core_jwt_auth_api.Services
       
         public async Task<User> PostUser(User user)
         {
+            // generate the hash
+            user.Password = GenerateHash(user);
+
             _context.User.Add(user);
-             _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             var  createdUser = await  GetById(user.Id);
             return createdUser;
